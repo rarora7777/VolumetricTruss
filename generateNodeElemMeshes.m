@@ -20,8 +20,8 @@ function generateNodeElemMeshes(data, outPath, rE, rN)
     elem = data.Elem;
     
     
-    [sV, sF] = readOBJ('../util_meshes/sphere_8_5.obj');
-    [cV, cF] = readOBJ('../util_meshes/cylinder_6.obj');
+    [sV, sF] = readOBJ('./util_meshes/sphere_8_5.obj');
+    [cV, cF] = readOBJ('./util_meshes/cylinder_6.obj');
 
     nsV = size(sV, 1);
     nsF = size(sF, 1);

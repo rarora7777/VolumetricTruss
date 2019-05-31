@@ -2,8 +2,7 @@ exampleIdx = 5; % cantilever beam
 resolution = 16; % select `rho=16`
 b = 0.1;  % select `beta=0.1` for parametrization solve
 
-result = processCSVwithSim3DCases(exampleIdx, b, resolution);
-truss = result{1};
+truss = processCSVwithSim3DCases(exampleIdx, b, resolution);
 
 % Generate sparser structure
 n = 2;  % generate sparse structure by selecting every n-th curve for each parameter
@@ -31,7 +30,9 @@ elem = SVI(elem);
 % Generate solid mesh using libigl/gptoolbox booleans
 [VT, FT] = wire_mesh(node, elem, 'PolySize', 6, 'Thickness', 3e-3, 'Solid', true);
 % Visualize and save the mesh
-tsurf(FT, VT, 'EdgeColor', 'none')
+tsurf(FT, VT, 'EdgeColor', 'k', 'FaceColor', [203, 109, 81]/255, 'EdgeAlpha', 0.5);
+axis equal off;
+
 writeOBJ('./results/beam_solid.obj', VT, FT);
 
 clear node elem d SVI;
