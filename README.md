@@ -13,7 +13,9 @@ Simply clone the repository to install.
 The provided MATLAB code depends on the following packages.
 1. [GAUSS](https://github.com/dilevin/GAUSS)
 2. [gptoolbox](https://github.com/alecjacobson/gptoolbox/)
-3. MATLAB. We have primarily tested with the version R2018b.
+3. MATLAB. We have primarily tested with the versions R2018a and R2018b.
+
+The code has been tested on Windows with MSVC2015 and MSVC2017 and on Mac OS with clang.
 
 # License
 
