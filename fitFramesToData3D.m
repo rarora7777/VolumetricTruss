@@ -1,7 +1,5 @@
 function dataOut = fitFramesToData3D(V, T, stress)
 
-    %utility cross product matrix function
-    cp = @(vec)[0 -vec(3) vec(2); vec(3) 0 -vec(1); -vec(2) vec(1) 0 ];
     tol = sqrt(eps);
     
     nT = size(T,1);
@@ -161,13 +159,7 @@ function dataOut = fitFramesToData3D(V, T, stress)
         cost = B1+alpha.*C1;
     end
 
-
-    %constrain a single point to condition the optimization
-     sigma0 = [sxx(1), sxy(1), sxz(1); sxy(1),syy(1), syz(1); sxz(1), syz(1), szz(1)];
-     [rot0, ~] = eig(sigma0);
-        
-    wMat = vrrotmat2vec(rot0);
-    
+ 
     options = optimoptions(...
         'fmincon',...
         'Display', 'iter',...
@@ -183,7 +175,6 @@ function dataOut = fitFramesToData3D(V, T, stress)
 
     numIter = 30;
     
-    fprev = inf; 
     trackCost = zeros(numIter,0);
 
     for iter=1:(numIter)
@@ -197,9 +188,6 @@ function dataOut = fitFramesToData3D(V, T, stress)
     wOpt = reshape(wOpt, size(w));
     wOpt = (1/4)*(wOpt(T(:,1),:)+wOpt(T(:,2),:)+wOpt(T(:,3),:)+wOpt(T(:,4),:));
 
-    Vface = (1/4)*(V(T(:,1),:)+V(T(:,2),:)+V(T(:,3),:)+V(T(:,4),:));
-
-
     dataOut.V = V;
     dataOut.T = T;
     dataOut.stress = stress;
@@ -208,7 +196,6 @@ function dataOut = fitFramesToData3D(V, T, stress)
     dataOut.t = zeros(size(wOpt,1),3);
 
     for ii=1:size(wOpt,1)
-        point = Vface(ii,:);
         frame = expm([0 -wOpt(ii,3) wOpt(ii,2); wOpt(ii,3) 0 -wOpt(ii,1); -wOpt(ii,2) wOpt(ii,1) 0 ]);
         dataOut.v(ii,:) = frame(1:3,1)';
         dataOut.w(ii,:) = frame(1:3,2)';
