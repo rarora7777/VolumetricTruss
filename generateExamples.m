@@ -1,7 +1,7 @@
 function [data, timings, mesh, errors] = generateExamples(cases, beta, res)
 	% takes in a list of case ids and resolutions, returns a cell array with all the data
     cases = sort(cases);
-    ii = 0;
+    ii = 1;
     data = cell(numel(cases), 1);
     mesh = cell(numel(cases), 1);
     timings = cell(numel(cases), 1);
@@ -9,16 +9,16 @@ function [data, timings, mesh, errors] = generateExamples(cases, beta, res)
 	
     for jj = cases
         try
-            [data{ii+1}, timings{ii+1}, mesh{ii+1}] = processCSVwithSim3DCases(jj, beta(ii+1), res(ii+1));
-            disp([mesh{ii+1} timings{ii+1}]);
-            result = data{ii+1};
-            time = timings{ii+1};
-            problemSize = mesh{ii+1};
-            save(['./results/res_', num2str(beta(ii+1)*10), '_', num2str(jj), '_', num2str(res(ii+1)), '.mat'],...
+            [data{ii}, timings{ii}, mesh{ii}] = processCSVwithSim3DCases(jj, beta(ii), res(ii));
+            disp([mesh{ii} timings{ii}]);
+            result = data{ii};
+            time = timings{ii};
+            problemSize = mesh{ii};
+            save(['./results/res_', num2str(beta(ii)*10), '_', num2str(jj), '_', num2str(res(ii)), '.mat'],...
                 'result', 'time', 'problemSize');
-            figure; drawTrussGraph(data{ii+1});
+            figure; drawTrussGraph(data{ii});
         catch ME
-            errors{ii+1} = ME;
+            errors{ii} = ME;
             disp(ME.identifier);
             disp(ME.message);
         end

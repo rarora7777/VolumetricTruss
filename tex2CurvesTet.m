@@ -1,5 +1,18 @@
 function dataOut = tex2CurvesTet(dataIn, res, boundaryOff, snapVertIdx)
-% One character abbreviations:
+% Trace the isolines of a texture parametrization to generate a truss
+% layout
+%
+% Input
+% dataIn: struct with the mesh description (dataIn.V, dataIn.T) and the 
+% parametrization (dataIn.u, dataIn.v, dataIn.w)
+% res: the resolution parameter (`rho` in the paper)
+% boundaryOff: If true, then does not trace boundary elements
+% snapVertIdx: Optional. Set of indices into dataIn.V to snap the truss
+% layout vertices to. That is, a truss node will lie on each of the indexed
+% vertices
+
+
+% Single-character abbreviations:
 % (U, V, W): the three texture coordinates
 % F: Faces (triangles)
 % T: Simplices (tris for 2D, tets for 3D)
