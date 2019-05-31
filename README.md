@@ -21,7 +21,7 @@ This code is available under the MIT license.
 
 # Usage
 
-Please see `batchResults.m` for example usage.
+Please see `exampleUsage.m` for example usage. Use `batchResults.m` to generate all the results provided in the paper.
 
 # Citation
 
