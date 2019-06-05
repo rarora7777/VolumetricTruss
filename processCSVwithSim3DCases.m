@@ -343,8 +343,36 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & (V(:, 2)-1.7).^2 + (V(:, 3)+4.55).^2 < 1.25*1.25;
             f = singleLoad(size(V, 1), Vb, [0, (4.3*1e4/sqrt(2))./sum(Vb), -(4.3*1e4/sqrt(2))./sum(Vb)]');
         
-		% Add your own problems here
+		% % Uncomment this block and add your own problems here
 		% case 21 % custom problem
+			% % First, load a mesh [V, T] and compute its boundary faces
+			% [V, T] = readMESH('file.mesh');
+			% F = boundary_faces(T);
+			%
+			% % Then, get the set of vertices on the boundary
+			% deg = accumarray(F(:), 1);
+            % deg = [deg; zeros(size(V, 1) - numel(deg), 1)];
+			%
+			% % NOTE: deg > 0 gives the set of vertices on the boundary
+			%
+			% % Finally, specify the boundary conditions
+			%
+			% % i) fixedV is the set of fixed vertices
+			% % For example, let's say all vertices with x-coordinate below 0
+			% fixedV = deg > 0 & V(:, 1) < 0;
+			% P = fixedBC(fixedV)
+			%
+			% % ii) Vb is the set of vertices on which forces are applied
+			% % For example, all vertices with y > 1 and x > 1
+			% Vb = deg > 0 & V(:, 2) > 1 & V(:, 1) > 1;
+			%
+			% % The 3rd input to singleLoad is the force applied per vertex 
+			% % in Vb, specified as a 3x1 column vector. For example, let's
+			% % say we want a total force of 100N in -Z direction, and
+			% % equally distribute this force across the vertices in Vb
+			% f = singleLoad(size(V, 1), Vb, [0, 0, -100/sum(Vb)]');
+			%
+			% % See case 17 for an example with multiple forces
 		
         otherwise
             dataOut = [];
