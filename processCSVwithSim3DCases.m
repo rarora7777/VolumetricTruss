@@ -9,7 +9,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
 	% Geometry for cantilever beam and bars is created on the fly.
     % Units are m, kg, N (makes sure meshes/geometries are sane sizes)
     switch example
-		case 1 %curved bridge
+	case 1 %curved bridge
             [V, T] = readMESH('./data/curved_bridge.mesh');
             
             F = boundary_faces(T);
@@ -26,7 +26,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             
             f = singleLoad(size(V, 1), Vb, [0, -1e5./sum(Vb), 0]');
 		
-		case 2 % mars lander (upper leg)
+	case 2 % mars lander (upper leg)
             [V, T] = readMESH('./data/mars_lander_upper_leg.mesh');
             
             F = boundary_faces(T);
@@ -39,7 +39,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & V(:, 1) + V(:, 3) < 5.2;
             f = singleLoad(size(V, 1), Vb, [0, -1e5./sum(Vb), 0]');
             
-		case 3 % satellite antenna arm
+	case 3 % satellite antenna arm
             [Vobj, Fobj] = readOBJ('./data/antenna.obj');
             [V, T] = tetgen(Vobj, Fobj, 'Flags', sprintf('-q1.2a%0.17f', 0.008*avgedge(Vobj, Fobj)^3/sqrt(2)));
             
@@ -53,7 +53,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & V(:, 2) > 0.12;
             f = singleLoad(size(V, 1), Vb, [0, -1000./sum(Vb), -500./sum(Vb)]');
 		
-		case 4 % holey pillar
+	case 4 % holey pillar
             [V, T] = readMESH('./data/holey_pillar.mesh');
             
             F = boundary_faces(T);
@@ -66,7 +66,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & (max(V(:, 2)) - V(:, 2)) < 0.1;
             f = singleLoad(size(V, 1), Vb, [0, -500./sum(Vb), 0]');
         
-		case 5 % cantilever beam
+	case 5 % cantilever beam
             %geometry
             dx = linspace(-.1, .1, 24);
             dy = linspace(-0.05, 0.05, 12);
@@ -85,7 +85,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             P = fixedBC(leftV);
             f = singleLoad(size(V,1), rightV, [0, -4 0]');
         
-		case 6 % bar under torsion
+	case 6 % bar under torsion
             %geometry
             dx = linspace(-.1, .1, 24);
             dy = linspace(-0.05, 0.05, 12);
@@ -124,7 +124,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             
             f = f1 + f2 + f3 + f4;
         
-		case 7 % bar under tension (pulled from both ends)
+	case 7 % bar under tension (pulled from both ends)
             dx = linspace(-.1, .1, 24);
             dy = linspace(-0.05, 0.05, 12);
             dz = linspace(-0.05, 0.05, 12);
@@ -147,7 +147,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
                 rightV,...
                 [mult 0 0]');
 			
-		case 8 % simple bridge
+	case 8 % simple bridge
             %load data
             [Vobj,Fobj] = readOBJ('./data/bridge.obj');
             [V,T] = tetgen(Vobj,Fobj,'Flags',sprintf('-q1.2a%0.17f',16*avgedge(Vobj,Fobj)^3/(6*sqrt(2))));
@@ -159,7 +159,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             
             f = singleLoad(size(V,1), Vb, [0, -1e4./sum(Vb) 0]');
         
-		case 9 % mars lander (lower leg)
+	case 9 % mars lander (lower leg)
             [V, T] = readMESH('./data/mars_lander_lower_leg.mesh');
             
             F = boundary_faces(T);
@@ -172,7 +172,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & V(:, 2) > -0.49;
             f = singleLoad(size(V, 1), Vb, [0, -1e5./sum(Vb), 0]');
 		
-		case 10 % pavilion
+	case 10 % pavilion
             [V, T] = readMESH('./data/pavilion.mesh');
             
             F = boundary_faces(T);
@@ -185,7 +185,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & (max(V(:, 2)) - V(:, 2)) < 1e-3;
             f = singleLoad(size(V, 1), Vb, [0, -1e5./sum(Vb), 0]');
         
-		case 11 % bookcase
+	case 11 % bookcase
             [V, T] = readMESH('./data/bookcase.mesh');
             
             F = boundary_faces(T);
@@ -229,7 +229,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & abs(V(:, 1)) < 0.82 & abs(V(:, 2) + 0.8) < 0.02;
             f = singleLoad(size(V, 1), Vb, [0, -1e5./sum(Vb), 0]');
 
-		case 13 % arched bridge
+	case 13 % arched bridge
             [V, T] = readMESH('./data/arched_bridge.mesh');
             
             F = boundary_faces(T);
@@ -242,7 +242,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & (3*V(:, 1) - 5*V(:, 2) < -17 | V(:, 1) + 2*V(:, 2) > 6 | V(:, 2) > 2);
             f = singleLoad(size(V, 1), Vb, [0, -1e4./sum(Vb), 0]');
         
-		case 14 %quadcopter frame
+	case 14 %quadcopter frame
             %load data
             [V, T] = readMESH('./data/quadcopter_frame.mesh');
             
@@ -253,7 +253,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             P = fixedBC(fixedV);
             f = singleLoad(size(V,1), Vb, [0, -100./sum(Vb) 0]');
 		
-		case 15 % helicopter top pylon
+	case 15 % helicopter top pylon
             [Vobj, Fobj] = readOBJ('./data/top_pylon.obj');
             [V, T] = tetgen(Vobj, Fobj, 'Flags', sprintf('-q1.2a%0.17f', 8*avgedge(Vobj, Fobj)^3/sqrt(2)));
             
@@ -267,7 +267,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & V(:, 2) < .03;
             f = singleLoad(size(V, 1), Vb, [0, -1e4./sum(Vb), 0]');
         
-		case 16 % chair under sitting load
+	case 16 % chair under sitting load
             [V, T] = readMESH('./data/chair.mesh');
             
             F = boundary_faces(T);
@@ -280,7 +280,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & V(:, 2) > 0.05 & V(:, 2) < 0.06 & V(:, 3) > -0.12;
             f = singleLoad(size(V, 1), Vb, [0, -700./sum(Vb), 0]');
         
-		case 17 % chair with rocking load
+	case 17 % chair with rocking load
             [V, T] = readMESH('./data/chair.mesh');
             
             F = boundary_faces(T);
@@ -298,7 +298,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             
             f = f1 + f2;
 			
-		case 18 %climbing_hold
+	case 18 %climbing_hold
             [V, T] = readMESH('./data/climbing_hold.mesh');
             
             F = boundary_faces(T);
@@ -312,7 +312,7 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             
             f = singleLoad(size(V, 1), Vb, [0, -700./sum(Vb), 0]');
 		
-		case 19 % holey sculpture
+	case 19 % holey sculpture
             [V, T] = readMESH('./data/holey_sculpture.mesh');
             
             F = boundary_faces(T);
@@ -343,36 +343,36 @@ function [dataOut, timings, mesh] = processCSVwithSim3DCases(example, BETA, res)
             Vb = deg > 0 & (V(:, 2)-1.7).^2 + (V(:, 3)+4.55).^2 < 1.25*1.25;
             f = singleLoad(size(V, 1), Vb, [0, (4.3*1e4/sqrt(2))./sum(Vb), -(4.3*1e4/sqrt(2))./sum(Vb)]');
         
-		% % Uncomment this block and add your own problems here
-		% case 21 % custom problem
-			% % First, load a mesh [V, T] and compute its boundary faces
-			% [V, T] = readMESH('file.mesh');
-			% F = boundary_faces(T);
-			%
-			% % Then, get the set of vertices on the boundary
-			% deg = accumarray(F(:), 1);
-            % deg = [deg; zeros(size(V, 1) - numel(deg), 1)];
-			%
-			% % NOTE: deg > 0 gives the set of vertices on the boundary
-			%
-			% % Finally, specify the boundary conditions
-			%
-			% % i) fixedV is the set of fixed vertices
-			% % For example, let's say all vertices with x-coordinate below 0
-			% fixedV = deg > 0 & V(:, 1) < 0;
-			% P = fixedBC(fixedV)
-			%
-			% % ii) Vb is the set of vertices on which forces are applied
-			% % For example, all vertices with y > 1 and x > 1
-			% Vb = deg > 0 & V(:, 2) > 1 & V(:, 1) > 1;
-			%
-			% % The 3rd input to singleLoad is the force applied per vertex 
-			% % in Vb, specified as a 3x1 column vector. For example, let's
-			% % say we want a total force of 100N in -Z direction, and
-			% % equally distribute this force across the vertices in Vb
-			% f = singleLoad(size(V, 1), Vb, [0, 0, -100/sum(Vb)]');
-			%
-			% % See case 17 for an example with multiple forces
+	% % Uncomment this block and add your own problems here
+	% case 21 % custom problem
+		% % First, load a mesh [V, T] and compute its boundary faces
+		% [V, T] = readMESH('file.mesh');
+		% F = boundary_faces(T);
+		%
+		% % Then, get the set of vertices on the boundary
+		% deg = accumarray(F(:), 1);
+            	% deg = [deg; zeros(size(V, 1) - numel(deg), 1)];
+		%
+		% % NOTE: deg > 0 gives the set of vertices on the boundary
+		%
+		% % Finally, specify the boundary conditions
+		%
+		% % i) fixedV is the set of fixed vertices
+		% % For example, let's say all vertices with x-coordinate below 0
+		% fixedV = deg > 0 & V(:, 1) < 0;
+		% P = fixedBC(fixedV);
+		%
+		% % ii) Vb is the set of vertices on which forces are applied
+		% % For example, all vertices with y > 1 and x > 1
+		% Vb = deg > 0 & V(:, 2) > 1 & V(:, 1) > 1;
+		%
+		% % The 3rd input to singleLoad is the force applied per vertex 
+		% % in Vb, specified as a 3x1 column vector. For example, let's
+		% % say we want a total force of 100N in -Z direction, and
+		% % equally distribute this force across the vertices in Vb
+		% f = singleLoad(size(V, 1), Vb, [0, 0, -100/sum(Vb)]');
+		%
+	% % See case 17 for an example with multiple forces
 		
         otherwise
             dataOut = [];
