@@ -1,6 +1,6 @@
 We are thankful to the following sources for inspiring our testcases.
 
-1. Satellite antenna (`aatenna.obj`): https://www.eos.info/case_studies/additive-manufacturing-of-antenna-bracket-for-satellite
+1. Satellite antenna (`antenna.obj`): https://www.eos.info/case_studies/additive-manufacturing-of-antenna-bracket-for-satellite
 2. Chair (`chair.mesh`): https://autodeskresearch.com/projects/dreamcatcher
 3. Jet engine bracket (`engine_bracket.mesh`): https://grabcad.com/challenges/ge-jet-engine-bracket-challenge
 4. Pillar and sculpture with holes (`holey_pillar.mesh`, `holey_sculpture.mesh`) generated using https://people.eecs.berkeley.edu/~sequin/SCULPTS/scherk.html
