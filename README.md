@@ -11,7 +11,7 @@ Simply clone the repository to install.
 `git clone https://github.com/rarora7777/VolumetricTruss`
 
 The provided MATLAB code depends on the following packages.
-1. [GAUSS](https://github.com/dilevin/GAUSS)
+1. [GAUSS](https://github.com/rarora7777/GAUSS)
 2. [gptoolbox](https://github.com/alecjacobson/gptoolbox/)
 3. MATLAB. We have primarily tested with the versions R2018a and R2018b.
 
